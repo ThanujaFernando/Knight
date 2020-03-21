@@ -5,15 +5,34 @@ import './App.css';
 function App() {
   return (
 
+    <div className="content-center">
     <table className="table-matrix" border="1">
       <tr>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
+        <td className="td">1</td>
+        <td className="td"></td>
+        <td className="td"></td>
+        <td className="td"></td>
+      </tr>
+      <tr>
+        <td className="td">1</td>
+        <td className="td"></td>
+        <td className="td"></td>
+        <td className="td"></td>
+      </tr>
+      <tr>
+        <td className="td">1</td>
+        <td className="td"></td>
+        <td className="td"></td>
+        <td className="td"></td>
+      </tr>
+      <tr>
+        <td className="td">1</td>
+        <td className="td"></td>
+        <td className="td"></td>
+        <td className="td"></td>
       </tr>
     </table>
+    </div>
 
 
 
