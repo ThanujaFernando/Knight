@@ -7,24 +7,25 @@ import {
   FaRegCircle,
 } from 'react-icons/fa';
 
+import Square from './components/Square';
+
+const generateGrid = () => {
+  return (
+    <Square gridIndex="22"/>
+  );
+};
+
 
 function App() {
   return (
-
     <div className="content-center">
-    <table className="table-matrix" border="1" cellspacing="0">
-      <tr>
-        <td className="td"><FaChessKnight size="30" /></td>
-        <td className="td"></td>
-        <td className="td"><FaRegCircle size="30" /></td>
-        <td className="td"></td>
-      </tr>
-      <tr>
-        <td className="td">1</td>
-        <td className="td"><FaCircle size="30" /></td>
-        <td className="td"></td>
-        <td className="td"></td>
-      </tr>
+    <table className="table-matrix" border="1" cellSpacing="0">
+      <thead></thead>
+      <tbody>
+        <tr>
+          {generateGrid()}
+        </tr>
+      </tbody>
     </table>
     </div>
 
