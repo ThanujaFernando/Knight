@@ -10,11 +10,17 @@
   border: 0.1px;
   border-style: solid;
   padding: 0px;
+  background-color: white;
 }
 
-.td:hover{
-  background-color: lightyellow;
+.valid-move{
+  background-color: lightgreen;
 }
+
+.invalid-move{
+  background-color: lightsalmon;
+}
+
 
 .content-center{
   display: flex;
