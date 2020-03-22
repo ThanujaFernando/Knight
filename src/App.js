@@ -20,6 +20,18 @@ const generateGrid = () => {
 const App = () => {
   const [playerIndex, setPlayerIndex] = React.useState([0,0]);
   const [knightIndex, setKnightIndex] = React.useState([1,3]);
+
+  // placeholder for knight's movements...
+  const moveKnight = (path) => {
+    path = [[0,1],[0,2],[0,3]];
+    path.forEach((eachPathIndex, i) => {
+      setTimeout(() => {
+        setKnightIndex(eachPathIndex);
+      }, i * 1000);
+    });
+  };
+  React.useEffect(() => moveKnight(), []);
+
   return (
     <div className="content-center">
     <table className="table-matrix" border="1" cellSpacing="0">
