@@ -19,6 +19,7 @@ const generateGrid = () => {
 
 const App = () => {
   const [playerIndex, setPlayerIndex] = React.useState([0,0]);
+  const [knightIndex, setKnightIndex] = React.useState([1,3]);
   return (
     <div className="content-center">
     <table className="table-matrix" border="1" cellSpacing="0">
@@ -26,6 +27,7 @@ const App = () => {
       <tbody>
       <GameContext.Provider value={{
         playerIndex:playerIndex, setPlayerIndex:setPlayerIndex,
+        knightIndex:knightIndex,
         }}>
         { generateGrid() }
       </GameContext.Provider>
