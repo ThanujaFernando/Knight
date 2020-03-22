@@ -33,8 +33,8 @@ const Square = ({gridIndex}) => {
         onMouseEnter={toggleHover}
         onMouseLeave={toggleHover}
     >
-      { gridIndex.toString() === game.playerIndex.toString() ? <FaChessKing size="10"/> : null }
-      { gridIndex.toString() === game.knightIndex.toString() ? <FaChessKnight size="10"/> : null }
+      { gridIndex.toString() === game.playerIndex.toString() ? <FaChessKing size="50"/> : null }
+      { gridIndex.toString() === game.knightIndex.toString() ? <FaChessKnight size="50"/> : null }
     </td>
   );
 }
