@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Square from './components/Square';
 import GameContext from './contexts/gameContext';
-
+import knightController from './controllers/knightController';
 
 const generateGrid = () => {
   const SIZE = 4;
@@ -20,6 +20,7 @@ const generateGrid = () => {
 const App = () => {
   const [playerIndex, setPlayerIndex] = React.useState([0,0]);
   const [knightIndex, setKnightIndex] = React.useState([1,3]);
+  const [isPlayerTurn, setIsPlayerTurn] = React.useState(true);
 
   // placeholder for knight's movements...
   const moveKnight = (path) => {
@@ -30,7 +31,25 @@ const App = () => {
       }, i * 1000);
     });
   };
-  React.useEffect(() => moveKnight(), []);
+  React.useEffect(() => {
+    knightController.setup(4);
+  }, []);
+
+  React.useEffect(() => {
+    playComputer();
+    setIsPlayerTurn(true);
+  }, [isPlayerTurn]);
+
+  const playComputer = () => {
+    console.log('--- computer play =--- ');
+    if (!isPlayerTurn){
+      const allPossiblePaths = knightController.getPossibleKnight(knightIndex);
+      const randomPath = allPossiblePaths[Math.floor(Math.random() * allPossiblePaths.length)]
+      setKnightIndex(randomPath);
+    }
+  };
+
+  // playComputer();
 
   return (
     <div className="content-center">
@@ -40,6 +59,8 @@ const App = () => {
       <GameContext.Provider value={{
         playerIndex:playerIndex, setPlayerIndex:setPlayerIndex,
         knightIndex:knightIndex,
+        isPlayerTurn,
+        setIsPlayerTurn,
         }}>
         { generateGrid() }
       </GameContext.Provider>
