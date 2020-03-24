@@ -37,7 +37,6 @@ const App = () => {
 
   React.useEffect(() => {
     playComputer();
-    setIsPlayerTurn(true);
   }, [isPlayerTurn]);
 
   const playComputer = () => {
@@ -46,6 +45,7 @@ const App = () => {
       const allPossiblePaths = knightController.getPossibleKnight(knightIndex);
       const randomPath = allPossiblePaths[Math.floor(Math.random() * allPossiblePaths.length)]
       setKnightIndex(randomPath);
+      setIsPlayerTurn(true);
     }
   };
 
