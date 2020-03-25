@@ -78,18 +78,36 @@ const getKnigthPath = (KnightOld, KnightNew) => {
     VerticalSign = VerticalSign * (-1);
     VDifference = VDifference * (-1);
   }
-  for (var i = 0; i < HDifference; i++) {
+  if (HDifference==2){
+  for (var i = 0; i < 2; i++) {
 
     PathArray[PathArrayIndex] = [TKnight[0], TKnight[1] + (HorizontalSign)];
     TKnight = PathArray[PathArrayIndex];
     PathArrayIndex = PathArrayIndex + 1;
   }
-  for (var j = 0; j < VDifference; j++) {
+  for (var j = 0; j < 1; j++) {
 
     PathArray[PathArrayIndex] = [TKnight[0] + (VerticalSign), TKnight[1]];
     TKnight = PathArray[PathArrayIndex];
     PathArrayIndex = PathArrayIndex + 1;
   }
+}
+
+if (VDifference==2){
+  
+  for (var j = 0; j < 2; j++) {
+
+    PathArray[PathArrayIndex] = [TKnight[0] + (VerticalSign), TKnight[1]];
+    TKnight = PathArray[PathArrayIndex];
+    PathArrayIndex = PathArrayIndex + 1;
+  }
+  for (var i = 0; i < 1; i++) {
+
+    PathArray[PathArrayIndex] = [TKnight[0], TKnight[1] + (HorizontalSign)];
+    TKnight = PathArray[PathArrayIndex];
+    PathArrayIndex = PathArrayIndex + 1;
+  }
+}
   return PathArray;
 }
 
