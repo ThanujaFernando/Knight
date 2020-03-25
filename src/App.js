@@ -28,11 +28,11 @@ const App = () => {
 
   // placeholder for knight's movements...
   const moveKnight = (path) => {
-    path = [[0,1],[0,2],[0,3]];
+    // path = [[0,1],[0,2],[0,3]];
     path.forEach((eachPathIndex, i) => {
       setTimeout(() => {
         setKnightIndex(eachPathIndex);
-      }, i * 1000);
+      }, i * 500);
     });
   };
   React.useEffect(() => {
@@ -45,9 +45,10 @@ const App = () => {
 
   const playComputer = () => {
     if (!isPlayerTurn){
-      const allPossiblePaths = knightController.getPossibleKnight(knightIndex);
-      const randomPath = allPossiblePaths[Math.floor(Math.random() * allPossiblePaths.length)]
-      setKnightIndex(randomPath);
+      const allPosibleIndexes = knightController.getPossibleKnight(knightIndex);
+      const randomIndex = allPosibleIndexes[Math.floor(Math.random() * allPosibleIndexes.length)];
+      const pathForRandomIndex = knightController.getKnigthPath(knightIndex,  randomIndex);
+      moveKnight(pathForRandomIndex);
       if (knightController.isLost(playerIndex, knightIndex)){
         alert.error(Messages.gameOver);
       }
