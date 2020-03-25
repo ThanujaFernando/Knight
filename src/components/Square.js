@@ -16,7 +16,8 @@ const Square = ({gridIndex}) => {
   const isValidMove = () => {
     return (
       (Math.abs(gridIndex[0] - game.playerIndex[0]) <=1) && 
-      (Math.abs(gridIndex[1] - game.playerIndex[1]) <=1)
+      (Math.abs(gridIndex[1] - game.playerIndex[1]) <=1) &&
+      (gridIndex.toString() !== game.playerIndex.toString())
     );
   }
 
