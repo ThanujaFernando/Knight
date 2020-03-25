@@ -52,7 +52,7 @@ const App = () => {
       const allPosibleIndexes = knightController.getPossibleKnight(knightIndex);
       const randomIndex = allPosibleIndexes[Math.floor(Math.random() * allPosibleIndexes.length)];
       const pathForRandomIndex = knightController.getKnigthPath(knightIndex,  randomIndex);
-      setCurrentKnightsPath(pathForRandomIndex);
+      setCurrentKnightsPath([knightIndex, ...pathForRandomIndex]);
       moveKnight(pathForRandomIndex);
       if (knightController.isLost(playerIndex, knightIndex)){
         alert.error(Messages.gameOver);
