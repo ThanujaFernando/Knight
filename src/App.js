@@ -2,10 +2,13 @@ import React from 'react';
 import './App.css';
 import Square from './components/Square';
 import GameContext from './contexts/gameContext';
-
+import knightController from './controllers/knightController';
+import { useAlert } from 'react-alert'
+import Messages from './gameSettings/messages';
+import Settings from './gameSettings/settings';
 
 const generateGrid = () => {
-  const SIZE = 4;
+  const SIZE = Settings.boardSize;
   let gridMap = [];
   for (let i=0; i<SIZE; i++){
     let rowMap = [<tr></tr>];
@@ -18,8 +21,10 @@ const generateGrid = () => {
 };
 
 const App = () => {
+  const alert = useAlert()
   const [playerIndex, setPlayerIndex] = React.useState([0,0]);
-  const [knightIndex, setKnightIndex] = React.useState([1,3]);
+  const [knightIndex, setKnightIndex] = React.useState([1,2]);
+  const [isPlayerTurn, setIsPlayerTurn] = React.useState(true);
 
   // placeholder for knight's movements...
   const moveKnight = (path) => {
@@ -30,7 +35,25 @@ const App = () => {
       }, i * 1000);
     });
   };
-  React.useEffect(() => moveKnight(), []);
+  React.useEffect(() => {
+    knightController.setup(Settings.boardSize);
+  }, []);
+
+  React.useEffect(() => {
+    playComputer();
+  }, [isPlayerTurn]);
+
+  const playComputer = () => {
+    if (!isPlayerTurn){
+      const allPossiblePaths = knightController.getPossibleKnight(knightIndex);
+      const randomPath = allPossiblePaths[Math.floor(Math.random() * allPossiblePaths.length)]
+      setKnightIndex(randomPath);
+      if (knightController.isLost(playerIndex, knightIndex)){
+        alert.error(Messages.gameOver);
+      }
+      setIsPlayerTurn(true);
+    }
+  };
 
   return (
     <div className="content-center">
@@ -40,6 +63,8 @@ const App = () => {
       <GameContext.Provider value={{
         playerIndex:playerIndex, setPlayerIndex:setPlayerIndex,
         knightIndex:knightIndex,
+        isPlayerTurn,
+        setIsPlayerTurn,
         }}>
         { generateGrid() }
       </GameContext.Provider>
