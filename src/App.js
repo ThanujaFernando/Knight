@@ -25,16 +25,20 @@ const App = () => {
   const [playerIndex, setPlayerIndex] = React.useState([0,0]);
   const [knightIndex, setKnightIndex] = React.useState([1,2]);
   const [isPlayerTurn, setIsPlayerTurn] = React.useState(true);
+  const [currentKnightsPath, setCurrentKnightsPath] = React.useState([]);
 
-  // placeholder for knight's movements...
+  // move knight with delay
   const moveKnight = (path) => {
-    path = [[0,1],[0,2],[0,3]];
     path.forEach((eachPathIndex, i) => {
       setTimeout(() => {
         setKnightIndex(eachPathIndex);
-      }, i * 1000);
+      }, i * 500);
+      setTimeout(() => {
+        setCurrentKnightsPath([]);
+      }, path.length * 500);
     });
   };
+
   React.useEffect(() => {
     knightController.setup(Settings.boardSize);
   }, []);
@@ -45,9 +49,11 @@ const App = () => {
 
   const playComputer = () => {
     if (!isPlayerTurn){
-      const allPossiblePaths = knightController.getPossibleKnight(knightIndex);
-      const randomPath = allPossiblePaths[Math.floor(Math.random() * allPossiblePaths.length)]
-      setKnightIndex(randomPath);
+      const allPosibleIndexes = knightController.getPossibleKnight(knightIndex);
+      const randomIndex = allPosibleIndexes[Math.floor(Math.random() * allPosibleIndexes.length)];
+      const pathForRandomIndex = knightController.getKnigthPath(knightIndex,  randomIndex);
+      setCurrentKnightsPath([knightIndex, ...pathForRandomIndex]);
+      moveKnight([knightIndex, ...pathForRandomIndex]);
       if (knightController.isLost(playerIndex, knightIndex)){
         alert.error(Messages.gameOver);
       }
@@ -65,6 +71,7 @@ const App = () => {
         knightIndex:knightIndex,
         isPlayerTurn,
         setIsPlayerTurn,
+        currentKnightsPath
         }}>
         { generateGrid() }
       </GameContext.Provider>

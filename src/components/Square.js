@@ -7,16 +7,23 @@ import {
   FaChessKing,
 } from 'react-icons/fa';
 import GameContext from '../contexts/gameContext';
+import isIndexInPath from '../utils/utils';
+import _ from 'lodash';
 
 const Square = ({gridIndex}) => {
   const game = React.useContext(GameContext);
   const [hovered, setHovered] = React.useState(false);
   const toggleHover = () => setHovered(!hovered);
   
+  const isInKnightsPath = () => {
+    return (isIndexInPath(game.currentKnightsPath, gridIndex));
+  };
+
   const isValidMove = () => {
     return (
       (Math.abs(gridIndex[0] - game.playerIndex[0]) <=1) && 
-      (Math.abs(gridIndex[1] - game.playerIndex[1]) <=1)
+      (Math.abs(gridIndex[1] - game.playerIndex[1]) <=1) &&
+      (!_.isEqual(gridIndex, game.playerIndex))
     );
   }
 
@@ -29,13 +36,16 @@ const Square = ({gridIndex}) => {
   
   return (
     <td onClick={ () => movePlayer() } 
-        className={`td ${hovered ? isValidMove() ? 'valid-move' : 'invalid-move' : ''}`}
+        className={`td 
+          ${hovered ? isValidMove() ? 'valid-move' : 'invalid-move' : null}
+          ${isInKnightsPath() ? 'knight-square': null}
+        `}
         id={ gridIndex.toString() }
         onMouseEnter={toggleHover}
         onMouseLeave={toggleHover}
     >
-      { gridIndex.toString() === game.playerIndex.toString() ? <FaChessKing size="50"/> : null }
-      { gridIndex.toString() === game.knightIndex.toString() ? <FaChessKnight size="50"/> : null }
+      { _.isEqual(gridIndex, game.playerIndex) ? <FaChessKing size="50"/> : null }
+      { _.isEqual(gridIndex, game.knightIndex) ? <FaChessKnight size="50"/> : null }
     </td>
   );
 }

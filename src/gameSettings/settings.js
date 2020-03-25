@@ -1,5 +1,5 @@
 const Settings = {
-  boardSize: 3,
+  boardSize: 4,
 }
 
 export default Settings;

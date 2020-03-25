@@ -21,6 +21,9 @@
   background-color: lightsalmon;
 }
 
+.knight-square{
+  background-color: lightpink;
+}
 
 .content-center{
   display: flex;
