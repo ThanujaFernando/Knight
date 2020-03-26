@@ -27,6 +27,7 @@ const App = () => {
   const [knightIndex, setKnightIndex] = React.useState([1,2]);
   const [isPlayerTurn, setIsPlayerTurn] = React.useState(true);
   const [currentKnightsPath, setCurrentKnightsPath] = React.useState([]);
+  const [knightTime, setKnightTime] = React.useState(0);
 
   // move knight with delay
   const moveKnight = (path) => {
@@ -36,11 +37,16 @@ const App = () => {
         if (_.isEqual(playerIndex, eachPathIndex)){
           alert.info(Messages.gameOver)
         }
-      }, i * 500);
-      setTimeout(() => {
-        setCurrentKnightsPath([]);
-      }, path.length * 500);
+      }, i * 500);      
     });
+    setTimeout(() => {
+      setCurrentKnightsPath([]);
+      setIsPlayerTurn(true);
+      setTimeout(() => {
+        setIsPlayerTurn(false);
+        console.log('after 5')
+      }, 5000);
+    }, path.length * 500);
   };
 
   React.useEffect(() => {
@@ -58,12 +64,12 @@ const App = () => {
       const pathForRandomIndex = knightController.getKnigthPath(knightIndex,  randomIndex);
       setCurrentKnightsPath([knightIndex, ...pathForRandomIndex]);
       moveKnight([knightIndex, ...pathForRandomIndex]);
-      setIsPlayerTurn(true);
     }
   };
 
   return (
     <div className="content-center">
+    {knightTime}
       {/* <button onClick={() => alert.info('Never underestimate a Knight!')} >  sadf</button> */}
     <table className="table-matrix" border="1" cellSpacing="0">
       <thead></thead>

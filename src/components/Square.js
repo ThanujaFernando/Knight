@@ -29,7 +29,7 @@ const Square = ({gridIndex}) => {
   }
 
   const movePlayer = () => {
-    if (isValidMove()){
+    if (isValidMove() && game.isPlayerTurn){
       game.setPlayerIndex(gridIndex);
       game.setIsPlayerTurn(false);
     }
