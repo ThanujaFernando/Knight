@@ -6,6 +6,7 @@ import knightController from './controllers/knightController';
 import { useAlert } from 'react-alert'
 import Messages from './gameSettings/messages';
 import Settings from './gameSettings/settings';
+import _ from 'lodash';
 
 const generateGrid = () => {
   const SIZE = Settings.boardSize;
@@ -32,6 +33,9 @@ const App = () => {
     path.forEach((eachPathIndex, i) => {
       setTimeout(() => {
         setKnightIndex(eachPathIndex);
+        if (_.isEqual(playerIndex, eachPathIndex)){
+          alert.info(Messages.gameOver)
+        }
       }, i * 500);
       setTimeout(() => {
         setCurrentKnightsPath([]);
@@ -54,15 +58,13 @@ const App = () => {
       const pathForRandomIndex = knightController.getKnigthPath(knightIndex,  randomIndex);
       setCurrentKnightsPath([knightIndex, ...pathForRandomIndex]);
       moveKnight([knightIndex, ...pathForRandomIndex]);
-      if (knightController.isLost(playerIndex, knightIndex)){
-        alert.error(Messages.gameOver);
-      }
       setIsPlayerTurn(true);
     }
   };
 
   return (
     <div className="content-center">
+      {/* <button onClick={() => alert.info('Never underestimate a Knight!')} >  sadf</button> */}
     <table className="table-matrix" border="1" cellSpacing="0">
       <thead></thead>
       <tbody>

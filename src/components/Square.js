@@ -13,7 +13,8 @@ import _ from 'lodash';
 const Square = ({gridIndex}) => {
   const game = React.useContext(GameContext);
   const [hovered, setHovered] = React.useState(false);
-  const toggleHover = () => setHovered(!hovered);
+  const mouseEnter = () => setHovered(true);
+  const mouseLeave = () => setHovered(false);
   
   const isInKnightsPath = () => {
     return (isIndexInPath(game.currentKnightsPath, gridIndex));
@@ -41,8 +42,8 @@ const Square = ({gridIndex}) => {
           ${isInKnightsPath() ? 'knight-square': null}
         `}
         id={ gridIndex.toString() }
-        onMouseEnter={toggleHover}
-        onMouseLeave={toggleHover}
+        onMouseEnter={mouseEnter}
+        onMouseLeave={mouseLeave}
     >
       { _.isEqual(gridIndex, game.playerIndex) ? <FaChessKing size="50"/> : null }
       { _.isEqual(gridIndex, game.knightIndex) ? <FaChessKnight size="50"/> : null }
