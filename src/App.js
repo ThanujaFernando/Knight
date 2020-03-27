@@ -7,6 +7,7 @@ import { useAlert } from 'react-alert'
 import Messages from './gameSettings/messages';
 import Settings from './gameSettings/settings';
 import _ from 'lodash';
+import Timer from './components/Timer';
 
 const generateGrid = () => {
   const SIZE = Settings.boardSize;
@@ -27,7 +28,7 @@ const App = () => {
   const [knightIndex, setKnightIndex] = React.useState([1,2]);
   const [isPlayerTurn, setIsPlayerTurn] = React.useState(true);
   const [currentKnightsPath, setCurrentKnightsPath] = React.useState([]);
-  const [knightTime, setKnightTime] = React.useState(0);
+  const [knightTime, setKnightTime] = React.useState(false);
 
   // move knight with delay
   const moveKnight = (path) => {
@@ -42,10 +43,6 @@ const App = () => {
     setTimeout(() => {
       setCurrentKnightsPath([]);
       setIsPlayerTurn(true);
-      setTimeout(() => {
-        setIsPlayerTurn(false);
-        console.log('after 5')
-      }, 5000);
     }, path.length * 500);
   };
 
@@ -68,9 +65,9 @@ const App = () => {
   };
 
   return (
+    <>
+    <Timer duration={5} completed={()=>{console.log('completed');setIsPlayerTurn(false)}}></Timer>
     <div className="content-center">
-    {knightTime}
-      {/* <button onClick={() => alert.info('Never underestimate a Knight!')} >  sadf</button> */}
     <table className="table-matrix" border="1" cellSpacing="0">
       <thead></thead>
       <tbody>
@@ -86,6 +83,7 @@ const App = () => {
       </tbody>
     </table>
     </div>
+    </>
   );
 }
 
