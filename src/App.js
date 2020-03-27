@@ -8,14 +8,15 @@ import Messages from './gameSettings/messages';
 import Settings from './gameSettings/settings';
 import _ from 'lodash';
 import Timer from './components/timer/Timer';
+import Points from './components/points/Points';
 
 const generateGrid = () => {
   const SIZE = Settings.boardSize;
   let gridMap = [];
-  for (let i=0; i<SIZE; i++){
+  for (let i = 0; i < SIZE; i++) {
     let rowMap = [<tr></tr>];
-    for (let j=0; j<SIZE; j++){
-      rowMap.push(<Square key={`${i},${j}`} gridIndex={[i,j]}/>);
+    for (let j = 0; j < SIZE; j++) {
+      rowMap.push(<Square key={`${i},${j}`} gridIndex={[i, j]} />);
     }
     gridMap = [gridMap, ...rowMap];
   }
@@ -24,21 +25,22 @@ const generateGrid = () => {
 
 const App = () => {
   const alert = useAlert()
-  const [playerIndex, setPlayerIndex] = React.useState([0,0]);
-  const [knightIndex, setKnightIndex] = React.useState([1,2]);
+  const [playerIndex, setPlayerIndex] = React.useState([0, 0]);
+  const [knightIndex, setKnightIndex] = React.useState([1, 2]);
   const [isPlayerTurn, setIsPlayerTurn] = React.useState(true);
   const [currentKnightsPath, setCurrentKnightsPath] = React.useState([]);
-  const [knightTime, setKnightTime] = React.useState(false);
+  const [playerPoints, setPlayerPoints] = React.useState(110);
 
   // move knight with delay
   const moveKnight = (path) => {
     path.forEach((eachPathIndex, i) => {
       setTimeout(() => {
         setKnightIndex(eachPathIndex);
-        if (_.isEqual(playerIndex, eachPathIndex)){
-          alert.info(Messages.gameOver)
+        if (_.isEqual(playerIndex, eachPathIndex)) {
+          alert.info(Messages.gameOver);
+          setPlayerPoints(0);
         }
-      }, i * 500);      
+      }, i * 500);
     });
     setTimeout(() => {
       setCurrentKnightsPath([]);
@@ -55,10 +57,10 @@ const App = () => {
   }, [isPlayerTurn]);
 
   const playComputer = () => {
-    if (!isPlayerTurn){
+    if (!isPlayerTurn) {
       const allPosibleIndexes = knightController.getPossibleKnight(knightIndex);
       const randomIndex = allPosibleIndexes[Math.floor(Math.random() * allPosibleIndexes.length)];
-      const pathForRandomIndex = knightController.getKnigthPath(knightIndex,  randomIndex);
+      const pathForRandomIndex = knightController.getKnigthPath(knightIndex, randomIndex);
       setCurrentKnightsPath([knightIndex, ...pathForRandomIndex]);
       moveKnight([knightIndex, ...pathForRandomIndex]);
     }
@@ -66,23 +68,25 @@ const App = () => {
 
   return (
     <>
-    <Timer duration={5} completed={()=>setIsPlayerTurn(false)}></Timer>
-    <div className="content-center">
-    <table className="table-matrix" border="1" cellSpacing="0">
-      <thead></thead>
-      <tbody>
       <GameContext.Provider value={{
-        playerIndex:playerIndex, setPlayerIndex:setPlayerIndex,
-        knightIndex:knightIndex,
+        playerIndex: playerIndex, setPlayerIndex: setPlayerIndex,
+        knightIndex: knightIndex,
         isPlayerTurn,
         setIsPlayerTurn,
-        currentKnightsPath
-        }}>
-        { generateGrid() }
+        currentKnightsPath,
+        playerPoints, setPlayerPoints,
+      }}>
+        <Timer duration={5} completed={() => setIsPlayerTurn(false)}></Timer>
+        <div className="content-center">
+          <table className="table-matrix" border="1" cellSpacing="0">
+            <thead></thead>
+            <tbody>
+              {generateGrid()}
+            </tbody>
+          </table>
+        </div>
+        <Points></Points>
       </GameContext.Provider>
-      </tbody>
-    </table>
-    </div>
     </>
   );
 }

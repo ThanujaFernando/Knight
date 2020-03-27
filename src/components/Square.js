@@ -33,6 +33,7 @@ const Square = ({gridIndex}) => {
     if (isValidMove()){
       game.setPlayerIndex(gridIndex);
       game.setIsPlayerTurn(false);
+      game.setPlayerPoints(game.playerPoints + 10);
     }
   };  
   
