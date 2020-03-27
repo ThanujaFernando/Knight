@@ -7,6 +7,7 @@ import { useAlert } from 'react-alert'
 import Messages from './gameSettings/messages';
 import Settings from './gameSettings/settings';
 import _ from 'lodash';
+import Timer from './components/timer/Timer';
 
 const generateGrid = () => {
   const SIZE = Settings.boardSize;
@@ -27,6 +28,7 @@ const App = () => {
   const [knightIndex, setKnightIndex] = React.useState([1,2]);
   const [isPlayerTurn, setIsPlayerTurn] = React.useState(true);
   const [currentKnightsPath, setCurrentKnightsPath] = React.useState([]);
+  const [knightTime, setKnightTime] = React.useState(false);
 
   // move knight with delay
   const moveKnight = (path) => {
@@ -36,11 +38,12 @@ const App = () => {
         if (_.isEqual(playerIndex, eachPathIndex)){
           alert.info(Messages.gameOver)
         }
-      }, i * 500);
-      setTimeout(() => {
-        setCurrentKnightsPath([]);
-      }, path.length * 500);
+      }, i * 500);      
     });
+    setTimeout(() => {
+      setCurrentKnightsPath([]);
+      setIsPlayerTurn(true);
+    }, path.length * 500);
   };
 
   React.useEffect(() => {
@@ -58,13 +61,13 @@ const App = () => {
       const pathForRandomIndex = knightController.getKnigthPath(knightIndex,  randomIndex);
       setCurrentKnightsPath([knightIndex, ...pathForRandomIndex]);
       moveKnight([knightIndex, ...pathForRandomIndex]);
-      setIsPlayerTurn(true);
     }
   };
 
   return (
+    <>
+    <Timer duration={5} completed={()=>setIsPlayerTurn(false)}></Timer>
     <div className="content-center">
-      {/* <button onClick={() => alert.info('Never underestimate a Knight!')} >  sadf</button> */}
     <table className="table-matrix" border="1" cellSpacing="0">
       <thead></thead>
       <tbody>
@@ -80,6 +83,7 @@ const App = () => {
       </tbody>
     </table>
     </div>
+    </>
   );
 }
 

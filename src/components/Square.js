@@ -24,7 +24,8 @@ const Square = ({gridIndex}) => {
     return (
       (Math.abs(gridIndex[0] - game.playerIndex[0]) <=1) && 
       (Math.abs(gridIndex[1] - game.playerIndex[1]) <=1) &&
-      (!_.isEqual(gridIndex, game.playerIndex))
+      (!_.isEqual(gridIndex, game.playerIndex)) && 
+      game.isPlayerTurn
     );
   }
 
