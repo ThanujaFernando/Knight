@@ -134,4 +134,4 @@ var AlertTemplate = function AlertTemplate(_ref) {
   );
 };
 
-module.exports = AlertTemplate;
+export default AlertTemplate;
