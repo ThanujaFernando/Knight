@@ -1,7 +1,7 @@
 import React from 'react';
 import './timer.css';
 
-const Timer = ({duration, resetTimer, completed}) => {
+const Timer = ({duration, completed}) => {
   const [currentTime, setCurrentTime] = React.useState(0);
 
   const setTimer = () => {
@@ -22,9 +22,8 @@ const Timer = ({duration, resetTimer, completed}) => {
   return (
     <div className="kchange-outer">
     <div id="progressbar">
-        <div style={{width:`${100*currentTime/5}%`}}></div>
+        <div style={{width:`${100*currentTime/duration}%`}}></div>
     </div>
-      {/* <span>{currentTime}</span> */}
     </div>
   )
 };

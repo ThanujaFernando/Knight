@@ -7,7 +7,7 @@ import { useAlert } from 'react-alert'
 import Messages from './gameSettings/messages';
 import Settings from './gameSettings/settings';
 import _ from 'lodash';
-import Timer from './components/Timer';
+import Timer from './components/timer/Timer';
 
 const generateGrid = () => {
   const SIZE = Settings.boardSize;
@@ -66,7 +66,7 @@ const App = () => {
 
   return (
     <>
-    <Timer duration={5} completed={()=>{console.log('completed');setIsPlayerTurn(false)}}></Timer>
+    <Timer duration={5} completed={()=>setIsPlayerTurn(false)}></Timer>
     <div className="content-center">
     <table className="table-matrix" border="1" cellSpacing="0">
       <thead></thead>

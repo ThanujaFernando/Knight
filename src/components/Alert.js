@@ -122,7 +122,11 @@ var AlertTemplate = function AlertTemplate(_ref) {
       { style: { flex: 2 } },
       React.createElement(
         'h1',
-        { style: { textAlign: 'center' } },
+        { style: { textAlign: 'center',
+                   letterSpacing: '17px',
+                   fontSize: '56px',
+                  } 
+        },
         message
       )
     ),

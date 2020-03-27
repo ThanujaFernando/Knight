@@ -1,5 +1,5 @@
 const Messages = {
-  gameOver: 'Game Over!!',
+  gameOver: 'Try harder!!',
 };
 
 export default Messages;
