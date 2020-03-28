@@ -10,12 +10,17 @@ import GameContext from '../contexts/gameContext';
 import isIndexInPath from '../utils/utils';
 import _ from 'lodash';
 import soundsLibrary from '../utils/soundsLibrary';
+import isMobile from '../utils/isMobile';
 
 const Square = ({gridIndex}) => {
   const game = React.useContext(GameContext);
   const [hovered, setHovered] = React.useState(false);
-  const mouseEnter = () => setHovered(true);
-  const mouseLeave = () => setHovered(false);
+  const mouseEnter = () => {
+    if (!isMobile()) setHovered(true);
+  };
+  const mouseLeave = () => {
+    if (!isMobile()) setHovered(false);
+  };
   
   const isInKnightsPath = () => {
     return (isIndexInPath(game.currentKnightsPath, gridIndex));

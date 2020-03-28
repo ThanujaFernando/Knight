@@ -30,7 +30,7 @@ const App = () => {
   const [knightIndex, setKnightIndex] = React.useState([1, 2]);
   const [isPlayerTurn, setIsPlayerTurn] = React.useState(true);
   const [currentKnightsPath, setCurrentKnightsPath] = React.useState([]);
-  const [playerPoints, setPlayerPoints] = React.useState(110);
+  const [playerPoints, setPlayerPoints] = React.useState(0);
 
   // move knight with delay
   const moveKnight = (path) => {

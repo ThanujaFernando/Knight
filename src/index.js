@@ -9,7 +9,7 @@ import AlertTemplate from './components/Alert';
 // alert cofiguration
 const alertOptions = {
   position: positions.TOP_CENTER,
-  timeout: 1500,
+  timeout: 0,
   offset: '0px',
   transition: transitions.SCALE
 }
