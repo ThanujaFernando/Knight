@@ -9,6 +9,7 @@ import Settings from './gameSettings/settings';
 import _ from 'lodash';
 import Timer from './components/timer/Timer';
 import Points from './components/points/Points';
+import soundsLibrary from './utils/soundsLibrary';
 
 const generateGrid = () => {
   const SIZE = Settings.boardSize;
@@ -39,6 +40,7 @@ const App = () => {
         if (_.isEqual(playerIndex, eachPathIndex)) {
           alert.info(Messages.gameOver);
           setPlayerPoints(0);
+          soundsLibrary.playGameOver();
         }
       }, i * 500);
     });

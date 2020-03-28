@@ -9,6 +9,7 @@ import {
 import GameContext from '../contexts/gameContext';
 import isIndexInPath from '../utils/utils';
 import _ from 'lodash';
+import soundsLibrary from '../utils/soundsLibrary';
 
 const Square = ({gridIndex}) => {
   const game = React.useContext(GameContext);
@@ -34,6 +35,7 @@ const Square = ({gridIndex}) => {
       game.setPlayerIndex(gridIndex);
       game.setIsPlayerTurn(false);
       game.setPlayerPoints(game.playerPoints + 10);
+      soundsLibrary.playPlayerMove();
     }
   };  
   
