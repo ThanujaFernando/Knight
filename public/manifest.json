@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "KnightSkip",
+  "name": "Can you skip the knight?",
   "icons": [
     {
       "src": "favicon.ico",
