@@ -89,6 +89,7 @@ const App = () => {
         </div>
         <Points></Points>
       </GameContext.Provider>
+      <a target="_blank" style={{position:'absolute', bottom:'10px', right:'10px',color:'white'}} href="https://github.com/ThanujaFernando/Knight">Source Code</a>
     </>
   );
 }
