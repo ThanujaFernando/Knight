@@ -96,6 +96,13 @@ const App = () => {
           </div>
           <Points></Points>
         </GameContext.Provider>
+        <div className="leaderboard-wrapper">
+          <ol>
+            <li>Thanuja weeraya</li>
+            <li>akila</li>
+            <li>Ramesh</li>
+          </ol>
+        </div>
         <a target="_blank" style={{position:'absolute', bottom:'10px', right:'10px',color:'white'}} href="https://github.com/ThanujaFernando/Knight">Source Code</a>
     </>
   );
