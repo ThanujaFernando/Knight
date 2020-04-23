@@ -31,6 +31,7 @@ const App = () => {
   const [isPlayerTurn, setIsPlayerTurn] = React.useState(true);
   const [currentKnightsPath, setCurrentKnightsPath] = React.useState([]);
   const [playerPoints, setPlayerPoints] = React.useState(0);
+  const [userName, setUserName] = React.useState('');
 
   // move knight with delay
   const moveKnight = (path) => {
@@ -51,6 +52,12 @@ const App = () => {
   };
 
   React.useEffect(() => {
+    const uname = localStorage.getItem('user-name');
+    if (uname === null || uname.length <= 0){
+      window.location = "/user";
+      return;
+    }
+    setUserName(localStorage.getItem('user-name'));
     knightController.setup(Settings.boardSize);
   }, []);
 
@@ -70,26 +77,26 @@ const App = () => {
 
   return (
     <>
-      <GameContext.Provider value={{
-        playerIndex: playerIndex, setPlayerIndex: setPlayerIndex,
-        knightIndex: knightIndex,
-        isPlayerTurn,
-        setIsPlayerTurn,
-        currentKnightsPath,
-        playerPoints, setPlayerPoints,
-      }}>
-        <Timer duration={5} completed={() => setIsPlayerTurn(false)}></Timer>
-        <div className="content-center">
-          <table className="table-matrix" border="1" cellSpacing="0">
-            <thead></thead>
-            <tbody>
-              {generateGrid()}
-            </tbody>
-          </table>
-        </div>
-        <Points></Points>
-      </GameContext.Provider>
-      <a target="_blank" style={{position:'absolute', bottom:'10px', right:'10px',color:'white'}} href="https://github.com/ThanujaFernando/Knight">Source Code</a>
+        <GameContext.Provider value={{
+          playerIndex: playerIndex, setPlayerIndex: setPlayerIndex,
+          knightIndex: knightIndex,
+          isPlayerTurn,
+          setIsPlayerTurn,
+          currentKnightsPath,
+          playerPoints, setPlayerPoints,
+        }}>
+          <Timer duration={5} completed={() => setIsPlayerTurn(false)}></Timer>
+          <div className="content-center">
+            <table className="table-matrix" border="1" cellSpacing="0">
+              <thead></thead>
+              <tbody>
+                {generateGrid()}
+              </tbody>
+            </table>
+          </div>
+          <Points></Points>
+        </GameContext.Provider>
+        <a target="_blank" style={{position:'absolute', bottom:'10px', right:'10px',color:'white'}} href="https://github.com/ThanujaFernando/Knight">Source Code</a>
     </>
   );
 }

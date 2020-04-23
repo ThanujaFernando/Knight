@@ -5,6 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from './components/Alert';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import UserNameInput from './components/userNameInput/UserNameInput';
  
 // alert cofiguration
 const alertOptions = {
@@ -16,9 +18,14 @@ const alertOptions = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <AlertProvider template={AlertTemplate} {...alertOptions}>
-      <App />
-    </AlertProvider>
+    <BrowserRouter>
+      <AlertProvider template={AlertTemplate} {...alertOptions}>
+        <Switch>
+          <Route path="/" component={App} exact />
+          <Route path="/user" component={UserNameInput} exact/>
+        </Switch>
+      </AlertProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
@@ -26,4 +33,4 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.register();

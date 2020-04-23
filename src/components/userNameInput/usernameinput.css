@@ -1,0 +1,40 @@
+.username-input{
+    height: 44px;
+    width: 260px;
+    padding: 11px;
+    border-radius: 10px;
+    font-size: 28px;
+    border: none;
+    color: deeppink;
+}
+
+.username-wrapper {
+    text-align: center;
+    position: relative;
+    top: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadein 2s;
+}
+
+@keyframes fadein {
+    from {opacity: 0%;}
+    to {opacity: 100%;}
+}
+
+.submit-div{
+    background-color: white;
+    width: 67px;
+    height: 67px;
+    margin: 10px;
+    border-radius: 50%;
+    color: lightgray;
+    cursor: pointer;
+    border: none;
+    transition: all .2s ease-in-out;
+}
+
+.submit-div :hover{
+    color:deeppink;
+}
