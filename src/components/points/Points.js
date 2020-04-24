@@ -9,7 +9,6 @@ const Points = () => {
   const game = React.useContext(GameContext);
  
   React.useEffect(() => {
-    console.log('asdfasdfasdf')
     const userObj = _.find(game.leaderboard, ['username', game.userName]);
     if (!userObj) return;
     if (userObj['points'] > game.playerPoints){
