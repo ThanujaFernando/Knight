@@ -5,14 +5,16 @@ const database = firebase.database;
 const realTimeCtrl = {
 
   addUserPoints : (username, points) => {
+    if (!username || !points) return;
     firebase.database().ref('leaders/' + username).update({
-      points: points,
+      points,
+      username,
     });
   },
 
   listenLeaderboard: (hookCallback) => {
     firebase.database().ref('/leaders').on('value', (data) => {
-      const leaders = _.orderBy(Object.values(data.val()), ['points'], ['desc'])
+      const leaders = _.orderBy(Object.values(data.val()), ['desc'])
       hookCallback(leaders);
     });
   }
