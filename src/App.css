@@ -56,3 +56,12 @@ body{
     height: 60px !important;
   }
 }
+
+.leaderboard-wrapper{
+  position: absolute;
+  top: 0vh;
+  background-color:white;
+  width: 30vh;
+  height: 50vh;
+
+}

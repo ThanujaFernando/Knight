@@ -10,6 +10,7 @@ import _ from 'lodash';
 import Timer from './components/timer/Timer';
 import Points from './components/points/Points';
 import soundsLibrary from './utils/soundsLibrary';
+import realTimeCtrl from './controllers/realTimeDb';
 
 const generateGrid = () => {
   const SIZE = Settings.boardSize;
@@ -31,6 +32,8 @@ const App = () => {
   const [isPlayerTurn, setIsPlayerTurn] = React.useState(true);
   const [currentKnightsPath, setCurrentKnightsPath] = React.useState([]);
   const [playerPoints, setPlayerPoints] = React.useState(0);
+  const [userName, setUserName] = React.useState('');
+  const [leaderboard, setLeaderboard] = React.useState({});
 
   // move knight with delay
   const moveKnight = (path) => {
@@ -51,7 +54,14 @@ const App = () => {
   };
 
   React.useEffect(() => {
+    const uname = localStorage.getItem('user-name');
+    if (uname === null || uname.length <= 0){
+      window.location = "/user";
+      return;
+    }
+    setUserName(localStorage.getItem('user-name'));
     knightController.setup(Settings.boardSize);
+    realTimeCtrl.listenLeaderboard(setLeaderboard);
   }, []);
 
   React.useEffect(() => {
@@ -70,26 +80,36 @@ const App = () => {
 
   return (
     <>
-      <GameContext.Provider value={{
-        playerIndex: playerIndex, setPlayerIndex: setPlayerIndex,
-        knightIndex: knightIndex,
-        isPlayerTurn,
-        setIsPlayerTurn,
-        currentKnightsPath,
-        playerPoints, setPlayerPoints,
-      }}>
-        <Timer duration={5} completed={() => setIsPlayerTurn(false)}></Timer>
-        <div className="content-center">
-          <table className="table-matrix" border="1" cellSpacing="0">
-            <thead></thead>
-            <tbody>
-              {generateGrid()}
-            </tbody>
-          </table>
+        <GameContext.Provider value={{
+          playerIndex: playerIndex, setPlayerIndex: setPlayerIndex,
+          knightIndex: knightIndex,
+          isPlayerTurn,
+          setIsPlayerTurn,
+          currentKnightsPath,
+          playerPoints, setPlayerPoints,
+          userName,
+          leaderboard,
+        }}>
+          <Timer duration={5} completed={() => setIsPlayerTurn(false)}></Timer>
+          <div className="content-center">
+            <table className="table-matrix" border="1" cellSpacing="0">
+              <thead></thead>
+              <tbody>
+                {generateGrid()}
+              </tbody>
+            </table>
+          </div>
+          <Points></Points>
+        </GameContext.Provider>
+        <div className="leaderboard-wrapper">
+          <ol>
+            <li>Thanuja weeraya</li>
+            <li>akila</li>
+            <li>Ramesh</li>
+            {JSON.stringify(leaderboard)}
+          </ol>
         </div>
-        <Points></Points>
-      </GameContext.Provider>
-      <a target="_blank" style={{position:'absolute', bottom:'10px', right:'10px',color:'white'}} href="https://github.com/ThanujaFernando/Knight">Source Code</a>
+        <a target="_blank" style={{position:'absolute', bottom:'10px', right:'10px',color:'white'}} href="https://github.com/ThanujaFernando/Knight">Source Code</a>
     </>
   );
 }
