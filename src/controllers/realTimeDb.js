@@ -14,7 +14,7 @@ const realTimeCtrl = {
 
   listenLeaderboard: (hookCallback) => {
     firebase.database().ref('/leaders').on('value', (data) => {
-      const leaders = _.orderBy(Object.values(data.val()), ['desc'])
+      const leaders = _.orderBy(Object.values(data.val()),['points'],['desc'])
       hookCallback(leaders);
     });
   }

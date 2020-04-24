@@ -11,6 +11,7 @@ import Timer from './components/timer/Timer';
 import Points from './components/points/Points';
 import soundsLibrary from './utils/soundsLibrary';
 import realTimeCtrl from './controllers/realTimeDb';
+import Profile from './components/profile/Profile';
 
 const generateGrid = () => {
   const SIZE = Settings.boardSize;
@@ -33,7 +34,7 @@ const App = () => {
   const [currentKnightsPath, setCurrentKnightsPath] = React.useState([]);
   const [playerPoints, setPlayerPoints] = React.useState(0);
   const [userName, setUserName] = React.useState('');
-  const [leaderboard, setLeaderboard] = React.useState({});
+  const [leaderboard, setLeaderboard] = React.useState([]);
 
   // move knight with delay
   const moveKnight = (path) => {
@@ -100,6 +101,7 @@ const App = () => {
             </table>
           </div>
           <Points></Points>
+          <Profile/>
         </GameContext.Provider>
         <div className="leaderboard-wrapper">
           <ol>
@@ -110,6 +112,7 @@ const App = () => {
           </ol>
         </div>
         <a target="_blank" style={{position:'absolute', bottom:'10px', right:'10px',color:'white'}} href="https://github.com/ThanujaFernando/Knight">Source Code</a>
+        
     </>
   );
 }

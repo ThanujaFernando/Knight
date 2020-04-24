@@ -9,12 +9,13 @@ const Points = () => {
   const game = React.useContext(GameContext);
  
   React.useEffect(() => {
+    if (game.leaderboard.length <= 0) return;
     const userObj = _.find(game.leaderboard, ['username', game.userName]);
-    if (!userObj) return;
-    if (userObj['points'] > game.playerPoints){
-      return;
+    if (!userObj){
+      realTimeCtrl.addUserPoints(game.userName, game.playerPoints);
+    } else if (userObj['points'] < game.playerPoints){
+      realTimeCtrl.addUserPoints(game.userName, game.playerPoints);
     }
-    realTimeCtrl.addUserPoints(game.userName, game.playerPoints);
   }, [game.playerPoints]);
   
   return (
