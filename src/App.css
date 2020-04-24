@@ -60,8 +60,28 @@ body{
 .leaderboard-wrapper{
   position: absolute;
   top: 0vh;
-  background-color:white;
+  background-color:lightblue;
+  background-image: url("https://storage.needpix.com/rsynced_images/water-background-texture.jpg");
   width: 30vh;
   height: 50vh;
 
+}
+
+.firstPlace{
+
+  background-color:gold;
+}
+
+.secondPlace{
+
+  background-color:silver;
+}
+
+.thirdPlace{
+
+  background-color:rgb(165, 81, 2);
+}
+
+.tableCss{
+  width:30vh
 }

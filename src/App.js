@@ -53,7 +53,7 @@ const App = () => {
 
   React.useEffect(() => {
     const uname = localStorage.getItem('user-name');
-    if (uname === null || uname.length <= 0){
+    if (uname === null || uname.length <= 0) {
       window.location = "/user";
       return;
     }
@@ -77,33 +77,57 @@ const App = () => {
 
   return (
     <>
-        <GameContext.Provider value={{
-          playerIndex: playerIndex, setPlayerIndex: setPlayerIndex,
-          knightIndex: knightIndex,
-          isPlayerTurn,
-          setIsPlayerTurn,
-          currentKnightsPath,
-          playerPoints, setPlayerPoints,
-        }}>
-          <Timer duration={5} completed={() => setIsPlayerTurn(false)}></Timer>
-          <div className="content-center">
-            <table className="table-matrix" border="1" cellSpacing="0">
-              <thead></thead>
-              <tbody>
-                {generateGrid()}
-              </tbody>
-            </table>
-          </div>
-          <Points></Points>
-        </GameContext.Provider>
-        <div className="leaderboard-wrapper">
-          <ol>
-            <li>Thanuja weeraya</li>
-            <li>akila</li>
-            <li>Ramesh</li>
-          </ol>
+      <GameContext.Provider value={{
+        playerIndex: playerIndex, setPlayerIndex: setPlayerIndex,
+        knightIndex: knightIndex,
+        isPlayerTurn,
+        setIsPlayerTurn,
+        currentKnightsPath,
+        playerPoints, setPlayerPoints,
+      }}>
+        <Timer duration={5} completed={() => setIsPlayerTurn(false)}></Timer>
+        <div className="content-center">
+          <table className="table-matrix" border="1" cellSpacing="0">
+            <thead></thead>
+            <tbody>
+              {generateGrid()}
+            </tbody>
+          </table>
         </div>
-        <a target="_blank" style={{position:'absolute', bottom:'10px', right:'10px',color:'white'}} href="https://github.com/ThanujaFernando/Knight">Source Code</a>
+        <Points></Points>
+      </GameContext.Provider>
+      <div className="leaderboard-wrapper">
+        <table className="tableCss">
+        <div className="firstPlace">
+            
+            <tr><td>
+              Dilen :
+              </td>
+              <td>120</td>
+            </tr>
+            </div>
+            <div className="secondPlace">
+            <tr>
+              <td>Asiri :</td>
+              <td>100</td>
+              
+
+            </tr>
+            </div>
+            <div className="thirdPlace">
+            <tr>
+              <td>
+              Nuwan :
+              </td>
+              <td>
+                80
+              </td>
+            </tr>
+            </div>
+          
+        </table>
+      </div>
+      <a target="_blank" style={{ position: 'absolute', bottom: '10px', right: '10px', color: 'white' }} href="https://github.com/ThanujaFernando/Knight">Source Code</a>
     </>
   );
 }
