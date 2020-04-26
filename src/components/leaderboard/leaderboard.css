@@ -1,0 +1,37 @@
+.leaderboard-wrapper{
+    position: absolute;
+    top: 82px;
+    background-color: rgba(255,255,255,0.3);
+    width: 200px;
+    height: 398px;
+    overflow: auto;
+}
+
+.leaders{
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    letter-spacing: 2px;
+}
+
+.leader{
+    padding: 6px;
+    margin-bottom: 3px;
+    border: solid;
+    border-width: 1px;
+    border-color: rgba(255,255,255,0.4);
+    background-color: rgba(255,255,255,0.4);
+    user-select: none;
+}
+
+.spinner-outer{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.leader-me {
+    border-color: deeppink !important;
+    border-width: 2px !important;
+}

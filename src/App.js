@@ -12,6 +12,7 @@ import Points from './components/points/Points';
 import soundsLibrary from './utils/soundsLibrary';
 import realTimeCtrl from './controllers/realTimeDb';
 import Profile from './components/profile/Profile';
+import Leaderboard from './components/leaderboard/Leaderboard';
 
 const generateGrid = () => {
   const SIZE = Settings.boardSize;
@@ -102,15 +103,8 @@ const App = () => {
           </div>
           <Points></Points>
           <Profile/>
+          <Leaderboard leadersList={leaderboard} userName={userName}/>
         </GameContext.Provider>
-        <div className="leaderboard-wrapper">
-          <ol>
-            <li>Thanuja weeraya</li>
-            <li>akila</li>
-            <li>Ramesh</li>
-            {JSON.stringify(leaderboard)}
-          </ol>
-        </div>
         <a target="_blank" style={{position:'absolute', bottom:'10px', right:'10px',color:'white'}} href="https://github.com/ThanujaFernando/Knight">Source Code</a>
         
     </>

@@ -4,7 +4,6 @@
     top: 82px;
     right: 0px;
     border-radius: 10px 0px 0px 10px;
-    box-shadow: 0 0 17px #ffffff;
     width: 123px;
     cursor: pointer;
     transition: ease-out 0.2s;
@@ -12,6 +11,7 @@
 }
 .profile-outer:hover{
     width: 200px;
+    color:white;
 }
 
 .user-name{
@@ -19,4 +19,5 @@
     text-align: center;
     font-size: 22px;
     overflow: hidden;
+    letter-spacing:2px;
 }
