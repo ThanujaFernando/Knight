@@ -2,6 +2,7 @@ import React from 'react';
 import './usernameinput.css';
 import { IoIosRocket } from 'react-icons/io';
 import { Redirect } from 'react-router-dom';
+import isMobile from '../../utils/isMobile';
 
 const UserNameInput = () => {
   const [userName, setUserName] = React.useState('')
@@ -30,7 +31,8 @@ const UserNameInput = () => {
   return (
     <>
     { allSet ? <Redirect to="/" /> : null}
-    <div className='username-wrapper'>
+    <div className='username-wrapper' 
+    style={{flexDirection:`${isMobile() ? 'column' : 'row'}`}}>
       <input onChange={(e) => setUserName(e.target.value)} className="username-input"  type="text" placeholder="Enter your name"></input>
       <button className="submit-div" onClick={() => saveUserName()}>
         <IoIosRocket size={40}></IoIosRocket>
