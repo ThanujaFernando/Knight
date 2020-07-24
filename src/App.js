@@ -10,6 +10,7 @@ import _ from 'lodash';
 import Timer from './components/timer/Timer';
 import Points from './components/points/Points';
 import soundsLibrary from './utils/soundsLibrary';
+import realTimeCtrl from './controllers/realTimeDb';
 
 const generateGrid = () => {
   const SIZE = Settings.boardSize;
@@ -32,6 +33,7 @@ const App = () => {
   const [currentKnightsPath, setCurrentKnightsPath] = React.useState([]);
   const [playerPoints, setPlayerPoints] = React.useState(0);
   const [userName, setUserName] = React.useState('');
+  const [leaderboard, setLeaderboard] = React.useState({});
 
   // move knight with delay
   const moveKnight = (path) => {
@@ -59,6 +61,7 @@ const App = () => {
     }
     setUserName(localStorage.getItem('user-name'));
     knightController.setup(Settings.boardSize);
+    realTimeCtrl.listenLeaderboard(setLeaderboard);
   }, []);
 
   React.useEffect(() => {
@@ -84,6 +87,8 @@ const App = () => {
           setIsPlayerTurn,
           currentKnightsPath,
           playerPoints, setPlayerPoints,
+          userName,
+          leaderboard,
         }}>
           <Timer duration={5} completed={() => setIsPlayerTurn(false)}></Timer>
           <div className="content-center">
@@ -101,6 +106,7 @@ const App = () => {
             <li>Thanuja weeraya</li>
             <li>akila</li>
             <li>Ramesh</li>
+            {JSON.stringify(leaderboard)}
           </ol>
         </div>
         <a target="_blank" style={{position:'absolute', bottom:'10px', right:'10px',color:'white'}} href="https://github.com/ThanujaFernando/Knight">Source Code</a>

@@ -7,7 +7,11 @@ import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from './components/Alert';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import UserNameInput from './components/userNameInput/UserNameInput';
+import * as firebase from "firebase/app";
+import config from './configs/config';
  
+firebase.initializeApp(config.firebaseConfig);
+
 // alert cofiguration
 const alertOptions = {
   position: positions.TOP_CENTER,
